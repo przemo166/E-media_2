@@ -14,3 +14,4 @@ A file format chosen : PNG
 - Changed GUI, added some buttons' functions.  
 
 ![Test Image 1](github_images/app2.png)
+![Test Image 1](github_images/app3.png)
