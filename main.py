@@ -20,7 +20,7 @@ makeStartPage(app)
 
 # Set-up the window
 app.title("E_media etap 2")
-app.geometry('1440x940')
+app.geometry('1440x980')
 app.resizable(False,False)
 app.resizable(width=False, height=False)
 app.mainloop()

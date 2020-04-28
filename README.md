@@ -14,3 +14,9 @@ A file format chosen : PNG
 - Changed GUI, added some buttons' functions.  
 
 ![Test Image 1](github_images/app3.png)
+
+# Third step 
+
+- Changed Gui.  
+
+![Test Image 1](github_images/app4.png)
