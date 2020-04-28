@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # Importing tkinter
 import tkinter as eMedia
 from tkinter import *
