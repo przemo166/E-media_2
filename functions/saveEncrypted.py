@@ -43,11 +43,22 @@ def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textPro
 
             idatArray = hexArray[position:position+(chunkLenghtDecimal*2)]
 
-
             tmparray1 = hexArray[0:position]
             tmparray2 = hexArray[position+(chunkLenghtDecimal*2):len(hexArray)]
 
+
             finalArray = tmparray1 + idatArray + tmparray2
+
+            print(finalArray)
+
+            tmp=tmparray1[0]+tmparray1[1]
+            print(tmp)
+            print(type(tmp))
+
+            tmpInt=int(tmp,16)
+            print(tmpInt)
+            print(type(tmpInt))
+
 
             savePngFile(finalArray,newImageName)
 
