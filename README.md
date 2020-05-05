@@ -3,20 +3,9 @@
 Repo for the second part of our  project.     
 A file format chosen : PNG  
 
-# First step 
 
-- Added starting files, a simple GUI template using tkinter has been made.  
+# Gui for our program 
 
-![Test Image 1](github_images/app1.png)
-
-# Second step 
-
-- Changed GUI, added some buttons' functions.  
-
-![Test Image 1](github_images/app3.png)
-
-# Third step 
-
-- Changed Gui.  
+- Made a simple GUI using tkinter in Python.  
 
 ![Test Image 1](github_images/app4.png)
