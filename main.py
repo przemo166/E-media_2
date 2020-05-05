@@ -9,13 +9,30 @@ import sys
 import os
 sys.path.append(os.path.abspath("functions"))
 from makeGui import *
+from generateRandomInt import *
 
+# Variables to save p and q numbers
+p = 0
+q = 0
+# end
+
+# Generating big prime ints
+p = generateRandomInt(512)
+q = generateRandomInt(512)
+# end
 
 # Initializing a main window
 app = eMedia.Tk()
 
 # Making start gui function
 makeStartPage(app)
+# end
+
+# To test p and q while programming
+print("P")
+print(p)
+print("Q")
+print(q)
 # end
 
 # Set-up the window

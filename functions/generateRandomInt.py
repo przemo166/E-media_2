@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python3s
 import random
 
 # Importing files from directory /functions
@@ -10,12 +10,8 @@ from checkIfPrime import *
 # Generating big prime intigers
 def generateRandomInt(bitsNumber):
 
-    tmp=random.getrandbits(bitsNumber)
+    tmpRandomInt=random.getrandbits(bitsNumber)
 
-    check = checkPrime(tmp)
-
-    if(tmp==True):
-        return tmp
-
-    else:
-        generateRandomInt(bitsNumber)
+    while not checkPrime(tmpRandomInt, 128):
+        tmpRandomInt=random.getrandbits(bitsNumber)
+    return tmpRandomInt
