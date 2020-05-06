@@ -78,7 +78,7 @@ def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textPro
             textProgramInfo.insert(eMedia.INSERT,"encrypted successfully")
 
         else :
-            messagebox.showinfo("Powiadomienie", "{}\nnieprawidłowa metoda !".format(fileName))
+            messagebox.showinfo("Powiadomienie", "{}\nnieprawidłowa metoda !".format(encryptionMethodName))
 
             textProgramInfo.delete(1.0,END)
             textProgramInfo.insert(eMedia.INSERT,"{}".format(fileName))
