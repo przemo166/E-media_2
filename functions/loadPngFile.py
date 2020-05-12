@@ -23,7 +23,7 @@ import numpy as np
 import io
 # end
 
-# Loading png file into decimal array ( global variable named decinalArray )
+# Loading png file and showing it in a label widget
 def loadFile(fileName,app,imageFrame,currentImageFrame,textProgramInfo):
 
     x = checkPng(fileName)

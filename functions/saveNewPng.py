@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-# Function that saves new png file
+# Function that saves new png file in directory created files
 def savePngFile(hexArray: str, newFileName: str):
 
         with open('binaryFile') as file:

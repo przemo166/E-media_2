@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 
-# NWD function for two intigers
+# Importing random module
+import random
+
+# NWD (Greatest common divisor ) function for two intigers
 def nwd (a,b):
     while b:
         a, b = b, a%b
@@ -32,6 +35,7 @@ def moduleInverse (a,n):
 
     return p1
 
+# Function that generates private and public RSA keys
 def generatePrivateAndPublicKeys(privateRSA,publicRSA,p,q):
 
     phi = (p-1)*(q-1)
@@ -39,12 +43,12 @@ def generatePrivateAndPublicKeys(privateRSA,publicRSA,p,q):
 
     e = 3
 
-    # Calculating e
-    while nwd(e,phi) != 1:
-        e+=2
+    while True:
+        e = random.randint(3, phi - 1)
+        if nwd(e, phi) == 1:
+            break
 
-    # Calculating d
-    d = moduleInverse(e,phi)
+    d = moduleInverse(e, phi)
 
     privateRSA[0] = d
     privateRSA[1] = n

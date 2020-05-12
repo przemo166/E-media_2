@@ -12,6 +12,7 @@ from makeGui import *
 from generateRandomInt import *
 from generateRSAkeys import *
 from otherRSAfunctions import *
+from showInfo import *
 
 # Variables to save p and q numbers
 p = 0
@@ -19,8 +20,8 @@ q = 0
 # end
 
 # Generating big prime ints
-p = generateRandomInt(12)
-q = generateRandomInt(12)
+p = generateRandomInt(512)
+q = generateRandomInt(512)
 # end
 
 # Variables to save public and private RSA key
@@ -37,21 +38,12 @@ p = 0
 q = 0
 # end
 
-# For testing purposes
-print("Private RSA :")
-print(privateRSA)
-print("Public RSA :")
-print(publicRSA)
+# For testing purposes (showing in a background terminal)
+printRsaKeys(privateRSA,publicRSA)
 # end
 
 # Testing RSA on simple example
-print("Zakodowana liczba (123) :")
-tmp=encryptRSA(publicRSA,123)
-print(tmp)
-
-print("Odkodowana liczba : ")
-tmp =decryptRSA(privateRSA,tmp)
-print(tmp)
+checkForInt(publicRSA,privateRSA,1400)
 # end
 
 # Initializing a main window
