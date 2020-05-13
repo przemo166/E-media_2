@@ -15,7 +15,7 @@ from saveDecrypted import *
 # A font constant
 LARGE_FONT = ('Verdana',30)
 
-def makeStartPage(app):
+def makeStartPage(app,privateRSA,publicRSA):
 
     # Creating widgets and frames
 
@@ -66,7 +66,8 @@ def makeStartPage(app):
         foreground="white",
         background="red",
         command=lambda:saveEncrypted(fileNameEntry.get(),app,imageFrame,newFileNameEntry.get(),
-                                        currentImageFrame,textProgramInfo,encryptionMethodEntry.get())
+                                        currentImageFrame,textProgramInfo,encryptionMethodEntry.get(),
+                                        privateRSA,publicRSA)
         )
 
     btnDecrypt = eMedia.Button(

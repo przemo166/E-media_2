@@ -4,6 +4,9 @@
 import tkinter as eMedia
 from tkinter import *
 
+# Importing time library
+import time
+
 # Importing files from directory /functions
 import sys
 import os
@@ -43,14 +46,18 @@ printRsaKeys(privateRSA,publicRSA)
 # end
 
 # Testing RSA on simple example
+startTime = time.time()
 checkForInt(publicRSA,privateRSA,1400)
+print("Done in :")
+result = time.time()-startTime
+print(result)
 # end
 
 # Initializing a main window
 app = eMedia.Tk()
 
 # Making start gui function
-makeStartPage(app)
+makeStartPage(app,privateRSA,publicRSA)
 # end
 
 # Set-up the window
