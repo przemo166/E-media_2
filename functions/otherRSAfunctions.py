@@ -14,11 +14,11 @@ def power(x, m, n):
 # Function that is encrypting a tmpNumber (t)
 def encryptRSA (publicKey,tmpNumber):
 
-    tmp=power(tmpNumber,publicKey[0],publicKey[1])
+    tmp=power(tmpNumber+3,publicKey[0],publicKey[1])
     return tmp
 
 # Function that is decrypting a tmpNumber (t)
 def decryptRSA (privateKey,tmpNumber):
 
     tmp=power(tmpNumber,privateKey[0],privateKey[1])
-    return tmp
+    return tmp-3

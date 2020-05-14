@@ -26,95 +26,91 @@ from checkSignature import *
 from otherRSAfunctions import *
 # end
 
-def encryptBlock(block,n,e):
-
-    blockInt= int(block,16)
-    encryptedBlock = encryptRSA(blockInt,publicRSA[1],publicRSA[0])
-    hexBlock = format(encryptedBlock,'x')
-    length = len(hexBlock)
-    if length % 2 != 0:
-        hexBlock = '0' + hexBlock
-    return hexBlock
-
 # Saving encrypted file
-def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textProgramInfo,encryptionMethodName,privateRSA,publicRSA):
+def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textProgramInfo,encryptionMethodName,publicRSA):
 
-    x = checkPng(fileName)
+    x = checkPngFirst(fileName)
 
     if (x==True):
 
         if (encryptionMethodName=="RSA"):
 
-            # Tak było
-
-            hexArray=imageConvert(fileName)
+            hexArray=imageConvertFirst(fileName)
             position = hexArray.find("49444154")
 
             chunkLenght = hexArray[(position-8):position]
             chunkLenghtDecimal = int(chunkLenght,16)
-            #position+=8
 
             realLength = 2 * chunkLenghtDecimal
             idatHex = hexArray[(position+8):(position + 8 + realLength)]
             newIDAT = ''
+
+            length = len(idatHex)
+            tmp = ''
+
+            if length % 8 != 0 :
+
+                for j in range(0,(8-length%8)):
+                    tmp = '0' + tmp
+
             i = 0
 
-            print("\n")
-            print(idatHex)
-            print("\n")
+            while i < realLength:
 
-            tmp = idatHex[4:6]
-            print("\nhexArray[0] in hex : ", tmp)
+                block = idatHex[i:i+2]
+                blockInt = int(block,16)
+                blockCodedInt = encryptRSA(publicRSA,blockInt)
+                blockCodedHex = format(blockCodedInt,'x')
 
-            tmpInt = int(tmp,16)
-            tmpCoded = encryptRSA(publicRSA,tmpInt)
-            print("\nhexArray[0] coded in int :",tmpCoded)
+                j = 0
 
-            tmpCodedHex =format(tmpCoded,'x')
-            print("\nhexArray[0]  coded in hex : ",tmpCodedHex)
+                length = len(blockCodedHex)
 
+                if length % 256 != 0 :
 
-            print("\nhexArray[0] encoded in int : ")
-            tmpEncodedInt = decryptRSA(privateRSA,int(tmpCoded))
-            print(tmpEncodedInt)
+                    for j in range(0,(256-length%256)):
+                        blockCodedHex = '0' + blockCodedHex
 
-            tmpEncodedHex = format(tmpEncodedInt,'x')
+                i+=2
 
-            length = len(tmpEncodedHex)
-            #print(length)
+                newIDAT += blockCodedHex
 
-            if length % 2 == 1 :
-                tmpEncodedHex = '0' + tmpEncodedHex
+            newIdatLength = int(len(newIDAT)/2)
+            newIdatLengthHex = format(newIdatLength,'x')
 
-            print("\nhexArray[0] encoded in hex : ")
-            print(tmpEncodedHex)
+            length = len(newIdatLengthHex)
 
-            i=0
+            if length % 8 != 0 :
 
-            for i in range(0,4):
-                newIDAT+=tmpCodedHex
+                for j in range(0,(8-length%8)):
+                    newIdatLengthHex = '0' + newIdatLengthHex
 
-            print("NewIdat : ", newIDAT)
+            newFile = hexArray[0:(position-8)]
+            newFile += newIdatLengthHex
+            newFile += hexArray[position:(position+8)]
+            newFile += newIDAT
+            newFile += hexArray[(position+realLength+8):]
 
-            tmp22=newIDAT[0]
-            print(tmp22)
+            print("\n---------------")
+            print("Encryption done")
+            print("---------------\n")
 
-            #savePngFile(newFile,newImageName)
+            savePngFile1(newFile,newImageName)
 
-            #image = Image.open('created_files/{}'.format(newImageName))
-            #photo = ImageTk.PhotoImage(image)
+            image = Image.open('example_files/{}'.format('encrypted.png'))
+            photo = ImageTk.PhotoImage(image)
 
-            #labelImage = Label(master=imageFrame,image=photo,width=700,height=650)
-            #labelImage.image = photo
-            #labelImage.grid(row=0,column=0)
+            labelImage = Label(master=imageFrame,image=photo,width=700,height=650)
+            labelImage.image = photo
+            labelImage.grid(row=0,column=0)
 
-            #currentImageLabel = Label(master=currentImageFrame,text=newImageName,font=('ariel',18,'bold'),bg='yellow',width=40)
-            #currentImageLabel.grid(row=0,column=0)
+            currentImageLabel = Label(master=currentImageFrame,text=newImageName,font=('ariel',18,'bold'),bg='yellow',width=40)
+            currentImageLabel.grid(row=0,column=0)
 
-            #textProgramInfo.delete(1.0,END)
-            #textProgramInfo.insert(eMedia.INSERT,"{}".format(fileName))
-            #textProgramInfo.insert(eMedia.INSERT,"\n")
-            #textProgramInfo.insert(eMedia.INSERT,"encrypted successfully")
+            textProgramInfo.delete(1.0,END)
+            textProgramInfo.insert(eMedia.INSERT,"{}".format(fileName))
+            textProgramInfo.insert(eMedia.INSERT,"\n")
+            textProgramInfo.insert(eMedia.INSERT,"encrypted successfully")
 
         else :
             messagebox.showinfo("Powiadomienie", "{}\nnieprawidłowa metoda !".format(encryptionMethodName))

@@ -67,7 +67,7 @@ def makeStartPage(app,privateRSA,publicRSA):
         background="red",
         command=lambda:saveEncrypted(fileNameEntry.get(),app,imageFrame,newFileNameEntry.get(),
                                         currentImageFrame,textProgramInfo,encryptionMethodEntry.get(),
-                                        privateRSA,publicRSA)
+                                        publicRSA)
         )
 
     btnDecrypt = eMedia.Button(
@@ -76,7 +76,8 @@ def makeStartPage(app,privateRSA,publicRSA):
         font=LARGE_FONT,
         foreground="white",
         background="green",
-        command=lambda:saveDecrypted(newFileNameEntry.get(),app,imageFrame,currentImageFrame)
+        command=lambda:saveDecrypted(newFileNameEntry.get(),app,imageFrame,currentImageFrame,encryptionMethodEntry.get(),privateRSA,
+                                        textProgramInfo)
         )
 
     programInfoLabel = eMedia.Label(master=buttonsFrame, text="Program info: ",font=LARGE_FONT)

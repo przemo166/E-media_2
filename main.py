@@ -3,9 +3,11 @@
 # Importing tkinter
 import tkinter as eMedia
 from tkinter import *
+# end
 
 # Importing time library
 import time
+# end
 
 # Importing files from directory /functions
 import sys
@@ -16,6 +18,7 @@ from generateRandomInt import *
 from generateRSAkeys import *
 from otherRSAfunctions import *
 from showInfo import *
+# end
 
 # Variables to save p and q numbers
 p = 0
@@ -45,12 +48,12 @@ q = 0
 printRsaKeys(privateRSA,publicRSA)
 # end
 
-# Testing RSA on simple example
+# Testing RSA on simple example [int number]
+print("\n")
 startTime = time.time()
-checkForInt(publicRSA,privateRSA,1400)
-print("Done in :")
+checkForInt(publicRSA,privateRSA,4)
+print("Done in :\n")
 result = time.time()-startTime
-print(result)
 # end
 
 # Initializing a main window

@@ -26,7 +26,7 @@ import io
 # Loading png file and showing it in a label widget
 def loadFile(fileName,app,imageFrame,currentImageFrame,textProgramInfo):
 
-    x = checkPng(fileName)
+    x = checkPngFirst(fileName)
 
     if (x==True):
 

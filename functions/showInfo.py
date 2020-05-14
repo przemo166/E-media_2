@@ -29,7 +29,7 @@ def checkForInt(publicRSA,privateRSA,tmpInt):
     print("#", tmpInt ,"            #")
     print("####################\n")
 
-    print("\nZakodowana liczba (1400) :")
+    print("\nZakodowana liczba (",tmpInt,") :")
     tmp=encryptRSA(publicRSA,tmpInt)
     print(tmp)
 
