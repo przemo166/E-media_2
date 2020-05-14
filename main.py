@@ -54,6 +54,7 @@ startTime = time.time()
 checkForInt(publicRSA,privateRSA,4)
 print("Done in :\n")
 result = time.time()-startTime
+print(result,"\n")
 # end
 
 # Initializing a main window

@@ -43,6 +43,11 @@ def saveDecrypted(fileName,app,imageFrame,currentImageFrame,encryptionMethodName
 
             i = 0
 
+            print("Enter a module length again please : ")
+            moduleLength = input()
+            moduleLengthInt = int(moduleLength)
+            print("Entered : " , moduleLengthInt , "\n")
+
             while i < realLength:
 
                 block = idatHex[i:i+256]
@@ -53,9 +58,9 @@ def saveDecrypted(fileName,app,imageFrame,currentImageFrame,encryptionMethodName
 
                 length = len(blockCodedHex)
 
-                if length % 2 != 0 :
+                if length % moduleLengthInt != 0 :
 
-                    for j in range(0,(2-length%2)):
+                    for j in range(0,(moduleLengthInt-length % moduleLengthInt)):
                         blockCodedHex = '0' + blockCodedHex
 
                 i+=256
@@ -79,7 +84,7 @@ def saveDecrypted(fileName,app,imageFrame,currentImageFrame,encryptionMethodName
             newFile += hexArray[(position+realLength+8):]
 
             print("\n---------------")
-            print("Decryption done")
+            print("Decryption done ", fileName, " done ")
             print("---------------\n")
 
             savePngFile2(newFile,fileName)

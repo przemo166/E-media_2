@@ -48,6 +48,12 @@ def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textPro
             length = len(idatHex)
             tmp = ''
 
+            print("\n Length of the IDAT is : ",length/2)
+            print("Select a module length : ")
+            moduleLength = input()
+            moduleLengthInt = int(moduleLength)
+            print("Selected : " , moduleLengthInt , "\n")
+
             if length % 8 != 0 :
 
                 for j in range(0,(8-length%8)):
@@ -57,7 +63,7 @@ def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textPro
 
             while i < realLength:
 
-                block = idatHex[i:i+2]
+                block = idatHex[i:i+moduleLengthInt]
                 blockInt = int(block,16)
                 blockCodedInt = encryptRSA(publicRSA,blockInt)
                 blockCodedHex = format(blockCodedInt,'x')
@@ -71,7 +77,7 @@ def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textPro
                     for j in range(0,(256-length%256)):
                         blockCodedHex = '0' + blockCodedHex
 
-                i+=2
+                i+=moduleLengthInt
 
                 newIDAT += blockCodedHex
 
@@ -92,7 +98,7 @@ def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textPro
             newFile += hexArray[(position+realLength+8):]
 
             print("\n---------------")
-            print("Encryption done")
+            print("Encryption done", fileName, " done ")
             print("---------------\n")
 
             savePngFile1(newFile,newImageName)
