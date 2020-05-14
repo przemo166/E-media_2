@@ -13,7 +13,7 @@ from saveEncrypted import *
 from saveDecrypted import *
 
 # A font constant
-LARGE_FONT = ('Verdana',30)
+LARGE_FONT = ('Verdana',15)
 
 def makeStartPage(app,privateRSA,publicRSA):
 
@@ -36,17 +36,23 @@ def makeStartPage(app,privateRSA,publicRSA):
 
     fileNameFrame.pack(padx=10,pady=10)
     # end
-    encryptionMethod = eMedia.Frame(master=app)
-    encryptionMethodLabel = eMedia.Label(master=encryptionMethod, text="Encryption method:  ",font=LARGE_FONT)
 
+    # EncryptionMethodFrame
+    encryptionMethod = eMedia.Frame(master=app)
+
+    encryptionMethodLabel = eMedia.Label(master=encryptionMethod, text="Encryption method:  ",font=LARGE_FONT)
     encryptionMethodEntry = eMedia.Entry(master=encryptionMethod,font=LARGE_FONT,width=15)
 
+    moduleLength = eMedia.Label(master=encryptionMethod, text="Enter module lenght (IDAT length % 'x' must equal 0 ) : ",font=LARGE_FONT)
+    moduleLengthEntry = eMedia.Entry(master=encryptionMethod,font=LARGE_FONT,width=15)
+
     encryptionMethodLabel.grid(row=0,column=0)
-    encryptionMethodEntry.grid(row=0,column=1)
+    encryptionMethodEntry.grid(row=0,column=1,padx=10)
+
+    moduleLength.grid(row=0,column=2)
+    moduleLengthEntry.grid(row=0,column=3)
 
     encryptionMethod.pack(padx=10,pady=10)
-    # EncryptionMethodFrame
-
     # end
 
     # Buttons frame and label and text program info
@@ -67,7 +73,7 @@ def makeStartPage(app,privateRSA,publicRSA):
         background="red",
         command=lambda:saveEncrypted(fileNameEntry.get(),app,imageFrame,newFileNameEntry.get(),
                                         currentImageFrame,textProgramInfo,encryptionMethodEntry.get(),
-                                        publicRSA)
+                                        publicRSA,moduleLengthEntry.get())
         )
 
     btnDecrypt = eMedia.Button(
@@ -77,12 +83,12 @@ def makeStartPage(app,privateRSA,publicRSA):
         foreground="white",
         background="green",
         command=lambda:saveDecrypted(newFileNameEntry.get(),app,imageFrame,currentImageFrame,encryptionMethodEntry.get(),privateRSA,
-                                        textProgramInfo)
+                                        textProgramInfo,moduleLengthEntry.get())
         )
 
     programInfoLabel = eMedia.Label(master=buttonsFrame, text="Program info: ",font=LARGE_FONT)
-    textProgramInfo = eMedia.Text(master=buttonsFrame,height=2,width=25)
-    textProgramInfo.configure(font=("Times New Roman", 28, "bold"))
+    textProgramInfo = eMedia.Text(master=buttonsFrame,height=3,width=35)
+    textProgramInfo.configure(font=("Times New Roman", 15, "bold"))
 
     btnLoadFile.grid(row=0,column=0,padx=5,pady=5)
     btnEncrypt.grid(row=0,column=1,padx=5,pady=5)

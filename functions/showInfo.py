@@ -20,19 +20,3 @@ def printRsaKeys(privateRSA,publicRSA):
     print("####################\n")
     print("e : ",publicRSA[0])
     print("n : ",publicRSA[1])
-
-# Function that prints RSA algorith example for an int value
-def checkForInt(publicRSA,privateRSA,tmpInt):
-
-    print("\n####################")
-    print("# Checking for  :  #")
-    print("#", tmpInt ,"            #")
-    print("####################\n")
-
-    print("\nZakodowana liczba (",tmpInt,") :")
-    tmp=encryptRSA(publicRSA,tmpInt)
-    print(tmp)
-
-    print("Odkodowana liczba : ")
-    tmp =decryptRSA(privateRSA,tmp)
-    print(tmp)

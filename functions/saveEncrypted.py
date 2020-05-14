@@ -27,7 +27,7 @@ from otherRSAfunctions import *
 # end
 
 # Saving encrypted file
-def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textProgramInfo,encryptionMethodName,publicRSA):
+def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textProgramInfo,encryptionMethodName,publicRSA,moduleLengthEntry):
 
     x = checkPngFirst(fileName)
 
@@ -48,75 +48,73 @@ def saveEncrypted(fileName,app,imageFrame,newImageName,currentImageFrame,textPro
             length = len(idatHex)
             tmp = ''
 
-            print("\n Length of the IDAT is : ",length/2)
-            print("Select a module length : ")
-            moduleLength = input()
-            moduleLengthInt = int(moduleLength)
-            print("Selected : " , moduleLengthInt , "\n")
+            moduleLengthEntryInt = int(moduleLengthEntry)
+            tmpInt = int(length/2)
 
-            if length % 8 != 0 :
+            if( (tmpInt % moduleLengthEntryInt) != 0 ):
+                messagebox.showinfo("Powiadomienie", "{}\nŹle dobrany x !".format(encryptionMethodName))
 
-                for j in range(0,(8-length%8)):
-                    tmp = '0' + tmp
+            else :
 
-            i = 0
+                if length % 8 != 0 :
 
-            while i < realLength:
+                    for j in range(0,(8-length%8)):
+                        tmp = '0' + tmp
 
-                block = idatHex[i:i+moduleLengthInt]
-                blockInt = int(block,16)
-                blockCodedInt = encryptRSA(publicRSA,blockInt)
-                blockCodedHex = format(blockCodedInt,'x')
+                i = 0
 
-                j = 0
+                while i < realLength:
 
-                length = len(blockCodedHex)
+                    block = idatHex[i:i+moduleLengthEntryInt]
+                    blockInt = int(block,16)
+                    blockCodedInt = encryptRSA(publicRSA,blockInt)
+                    blockCodedHex = format(blockCodedInt,'x')
 
-                if length % 256 != 0 :
+                    j = 0
 
-                    for j in range(0,(256-length%256)):
-                        blockCodedHex = '0' + blockCodedHex
+                    length = len(blockCodedHex)
 
-                i+=moduleLengthInt
+                    if length % 256 != 0 :
 
-                newIDAT += blockCodedHex
+                        for j in range(0,(256-length%256)):
+                            blockCodedHex = '0' + blockCodedHex
 
-            newIdatLength = int(len(newIDAT)/2)
-            newIdatLengthHex = format(newIdatLength,'x')
+                    i+=moduleLengthEntryInt
 
-            length = len(newIdatLengthHex)
+                    newIDAT += blockCodedHex
 
-            if length % 8 != 0 :
+                newIdatLength = int(len(newIDAT)/2)
+                newIdatLengthHex = format(newIdatLength,'x')
 
-                for j in range(0,(8-length%8)):
-                    newIdatLengthHex = '0' + newIdatLengthHex
+                length = len(newIdatLengthHex)
 
-            newFile = hexArray[0:(position-8)]
-            newFile += newIdatLengthHex
-            newFile += hexArray[position:(position+8)]
-            newFile += newIDAT
-            newFile += hexArray[(position+realLength+8):]
+                if length % 8 != 0 :
 
-            print("\n---------------")
-            print("Encryption done", fileName, " done ")
-            print("---------------\n")
+                    for j in range(0,(8-length%8)):
+                        newIdatLengthHex = '0' + newIdatLengthHex
 
-            savePngFile1(newFile,newImageName)
+                newFile = hexArray[0:(position-8)]
+                newFile += newIdatLengthHex
+                newFile += hexArray[position:(position+8)]
+                newFile += newIDAT
+                newFile += hexArray[(position+realLength+8):]
 
-            image = Image.open('example_files/{}'.format('encrypted.png'))
-            photo = ImageTk.PhotoImage(image)
+                savePngFile1(newFile,newImageName)
 
-            labelImage = Label(master=imageFrame,image=photo,width=700,height=650)
-            labelImage.image = photo
-            labelImage.grid(row=0,column=0)
+                image = Image.open('example_files/{}'.format('encrypted.png'))
+                photo = ImageTk.PhotoImage(image)
 
-            currentImageLabel = Label(master=currentImageFrame,text=newImageName,font=('ariel',18,'bold'),bg='yellow',width=40)
-            currentImageLabel.grid(row=0,column=0)
+                labelImage = Label(master=imageFrame,image=photo,width=700,height=700)
+                labelImage.image = photo
+                labelImage.grid(row=0,column=0)
 
-            textProgramInfo.delete(1.0,END)
-            textProgramInfo.insert(eMedia.INSERT,"{}".format(fileName))
-            textProgramInfo.insert(eMedia.INSERT,"\n")
-            textProgramInfo.insert(eMedia.INSERT,"encrypted successfully")
+                currentImageLabel = Label(master=currentImageFrame,text=newImageName,font=('ariel',18,'bold'),bg='yellow',width=40)
+                currentImageLabel.grid(row=0,column=0)
+
+                textProgramInfo.delete(1.0,END)
+                textProgramInfo.insert(eMedia.INSERT,"{}".format(fileName))
+                textProgramInfo.insert(eMedia.INSERT,"\n")
+                textProgramInfo.insert(eMedia.INSERT,"encrypted successfully")
 
         else :
             messagebox.showinfo("Powiadomienie", "{}\nnieprawidłowa metoda !".format(encryptionMethodName))

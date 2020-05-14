@@ -48,15 +48,6 @@ q = 0
 printRsaKeys(privateRSA,publicRSA)
 # end
 
-# Testing RSA on simple example [int number]
-print("\n")
-startTime = time.time()
-checkForInt(publicRSA,privateRSA,4)
-print("Done in :\n")
-result = time.time()-startTime
-print(result,"\n")
-# end
-
 # Initializing a main window
 app = eMedia.Tk()
 
