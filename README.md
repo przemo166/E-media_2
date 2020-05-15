@@ -5,5 +5,5 @@ A file format chosen : PNG
 
 # Program demo 
 
-![](github_images/demo.gif)
-![](github_images/gif2.gif)
+![](github_images/final.gif)
+
