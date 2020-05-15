@@ -5,5 +5,7 @@ A file format chosen : PNG
 
 # Program demo 
 
-![](github_images/final.gif)
 
+<p align="center">
+![](github_images/final.gif)
+</p>
