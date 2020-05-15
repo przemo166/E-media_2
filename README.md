@@ -7,10 +7,6 @@ A file format chosen : PNG
 
 
 <p align="center">
- <img ![](github_images/final.gif) />
-</p>
-
-<p align="center">
-  <img width="600" height="200" src="https://raw.githubusercontent.com/przemo166/RSA-Algorithm/master/github_images/final.gif">
+  <img width="800" height="450" src="https://raw.githubusercontent.com/przemo166/RSA-Algorithm/master/github_images/final.gif">
 </p>
 
