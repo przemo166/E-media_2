@@ -10,3 +10,13 @@ A file format chosen : PNG
   <img width="800" height="450" src="https://raw.githubusercontent.com/przemo166/RSA-Algorithm/master/github_images/final.gif">
 </p>
 
+
+# Info about program
+
+|  Nr.   |   | |
+| :------------: | :------------: | :------------: |
+| 1 | Programming language  | Python 3|
+| 2 | Gui  | Tkinter package|
+| 3 | Encode/decode  | PNG files|
+
+
