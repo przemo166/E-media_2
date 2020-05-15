@@ -20,6 +20,6 @@ A file format chosen : PNG
 | 3 | Encode/decode  | PNG files|
 
 
-# About RSA Algorithm info
+# About RSA Algorithm 
 
 [Wikipedia](https://en.wikipedia.org/wiki/Cryptosystem) 
